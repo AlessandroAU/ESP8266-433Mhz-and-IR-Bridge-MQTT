@@ -4,22 +4,21 @@ ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to
 This project uses an ESP8266 to bridge 433/315Mhz OOK/ASK RF modules as well as 38khz based IR devices to a LAN network.
 The primary intended form of communication is over MQTT to allow for easy integration into home automation systems such as OpenHAB or HomeAssistant
 
-This means you can send and recieve from ANY 433Mhz/315Mhz OOK sensor, switch etc.
-It also supports any 38 khz IR device. At the moment packets are raw format and excoded as pulse lengths, 
-there is no packet decoding implimented yet.
+This means you can send and receive from ANY 433Mhz/315Mhz OOK sensor, switch etc.
+It also supports any 38 khz IR device. At the moment packets are raw format and encoded as pulse lengths, 
+there is no packet decoding implemented yet.
 
-The bridge can be as 'polished' or rudmentary as you like, the bridge can be built on a breadboard or integrated into a custom housing.
-STLs will be provided for a 3D printed enclosure that fits a WeMos 8266 along with a daughter board to mount the RF modules. See images.
+The bridge can be as 'polished' or rudimentary as you like, the bridge can be built on a breadboard or integrated into a custom housing.
+STLs will be provided for a 3D printed enclosure that fits a WeMo 8266 along with a daughter board to mount the RF modules. See images.
 
-The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are avaiable cheaply from various online sources. 
+The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
 
-Basic Usage:
+<b> Basic Usage: </b>
 
-Pre-req:
 You will need a properly setup and working MQTT server on your local network (WAN servers have not been tested)
 
-After flashing firmware you should see the device appear in your wireless network list. Connect to the device and browse to 192.168.4.1
-Enter the Wifi Credentials for your network. The WifiManager Librairy is used for the moment. After connection there will not be an active webserver
+After flashing firmware, you should see the device appear in your wireless network list. Connect to the device and browse to 192.168.4.1
+Enter the Wifi Credentials for your network. The WifiManager Library is used for the moment. After connection there will not be an active webserver
 all comms will occur over MQTT.
 
 Assuming everything is working correctly the bridge will now use pub/sub messages for communication.
@@ -42,7 +41,7 @@ The following topics are used for communication:
 
 <b>ESP/Status</b>   ---MQTT Pub Topic, Publishes Debug Messages to here
 
-Example:
+<b> Example: </b>
 Lets say you want to control a 433mhz switch from your home automation system.
 
 I assume you are running the MQTT server on a linux based device. 
@@ -59,6 +58,48 @@ If there is some RF noise in your location you may already see some messages com
 You should see packets stream through.
 
 ![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/example/sub.PNG)
+
+The is the RAW packet stucture, the first value the length of the the packet, each value after is the number of 'ticks' (interrupt routines) before the signal toggle states.
+
+For the example in the above image: (not to scale)
+
+___________---______---___------______
+   124      6   22   7  7   20    22
+   
+A small variance is expected and will not effect operation.
+
+Now to send that signal you simply publish the same message to "ESP/RFtoSend"
+
+<b>mosquitto_pub -t "ESP/RFtoSend" -m "{37,126,5,22,6,9,18,22,6,9,19,23,5,22,6,9,19,9,19,23,5,22,6,9,19,9,19,21,5,8,20,8,20,9,17,9,19}"</b>
+
+The packet will be relayed over 433Mhz and should emulate the effect of the hardware remote. 
+
+<b> OpenHAB integration </b>
+To bind this to a virtual switch in OpenHAB is simple.
+
+The best way is to have a .map file. 
+
+Make a .map file and place it under 'transform' in your OpenHAB directory
+This should be self explanatory, but basically we 'map' switch state like ON/OFF to the RF packet
+
+It will look like this:
+
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/example/OpenHAB_map.PNG)
+
+save it to: (for example)
+
+
+
+transform/RF/AlessFanLight.map
+
+Will you need to have the transform addon enabled in OpenHAB as well as the MQTT service configured
+
+Now your switch binding is would be something like this: 
+
+<b> {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"} </b>
+
+Now when the switch recieves an ON or OFF command it will be 'mapped' to the RF packet, and sent out to the ESP8266 bridge to be relayed over the air.
+
 
 
 License: CC BY-NC-SA 3.0
