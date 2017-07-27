@@ -56,7 +56,7 @@ String getMacAddress() {
 const char* mqtt_server = "192.168.1.103";
 //const char* mqtt_clientid = getMacAddress().c_str();
 const char* mqtt_username = "openhab";
-const char* mqtt_password = "h1A8iap@123";
+//const char* mqtt_password = "";
 long lastReconnectAttempt = 0;
 
 String mqttbuff;
