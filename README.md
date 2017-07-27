@@ -26,16 +26,21 @@ Assuming everything is working correctly the bridge will now use pub/sub message
 
 The following topics are used for communication:
 
-ESP/RFtoSend  ---MQTT Sub Topic, Will relay any messages here over RF
-ESP/IRtoSend  ---MQTT Sub Topic, Will relay any messages here over IR
+<b>ESP/RFtoSend</b>  ---MQTT Sub Topic, Will relay any messages here over RF
 
-ESP/RFrecv  ---MQTT Pub Topic, Will publish any RF packets recieved here
-ESP/IRrecv  ---MQTT Pub Topic, Will publish any IR packets recieved here
+<b>ESP/IRtoSend</b>  ---MQTT Sub Topic, Will relay any messages here over IR
 
-ESP/RLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
-ESP/GLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
-ESP/BLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
-ESP/Status    ---MQTT Pub Topic, Publishes Debug Messages to here
+<b>ESP/RFrecv</b>  ---MQTT Pub Topic, Will publish any RF packets recieved here
+
+<b>ESP/IRrecv</b> ---MQTT Pub Topic, Will publish any IR packets recieved here
+
+<b>ESP/RLED</b>      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
+
+<b>ESP/GLED</b>      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
+
+<b>ESP/BLED</b>     ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
+
+<b>ESP/Status</b>   ---MQTT Pub Topic, Publishes Debug Messages to here
 
 Example:
 Lets say you want to control a 433mhz switch from your home automation system.
@@ -53,7 +58,7 @@ mosquitto_sub -t "ESP/RFrecv"
 If there is some RF noise in your location you may already see some messages come through. Press button on your RF device.
 You should see packets stream through.
 
-![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT\Images\example\sub.PNG)
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/Images/example/sub.PNG)
 
 
 License: CC BY-NC-SA 3.0
