@@ -114,5 +114,9 @@ For IR packets it is the exact same proceedure, just use the IR MQTT topics.
 Decoding received data is more complex, currently I handle this with a custom python script,
 I would like to impliment something more elegant on the bridge itself. 
 
+Like my work and want to buy me a beer?:
+Donate Bitcoin!
+
+BTC: 1NZ1k6XDN7KLy2XSQfdu96SEhrRuJMYbpd
 
 License: CC BY-NC-SA 3.0
