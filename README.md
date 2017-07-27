@@ -107,6 +107,7 @@ Now your switch binding would be something like this:
 Now when the switch recieves an ON or OFF command it will be 'mapped' to the RF packet, and sent out to the ESP8266 bridge to be relayed over the air.
 If you have an RTL-SDR module you can use to make sure the data is being sent.
 
+For IR packets it is the exact same proceedure, just use the IR MQTT topics.
 
 Decoding received data is more complex, currently I handle this with a custom python script,
 I would like to impliment something more elegant on the bridge itself. 
