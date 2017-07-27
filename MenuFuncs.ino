@@ -1,8 +1,8 @@
 const char IntroMessage[] PROGMEM  = 
 {"ESP/RFtoSend  ---MQTT Sub Topic, Will relay any messages here over RF\n"
 "ESP/IRtoSend  ---MQTT Sub Topic, Will relay any messages here over IR\n\n"
-"ESP/IRtoSend  ---MQTT Pub Topic, Will publish any RF packets recieved here\n"
-"ESP/IRtoSend  ---MQTT Pub Topic, Will publish any IR packets recieved here\n\n"
+"ESP/RFrecv  ---MQTT Pub Topic, Will publish any RF packets recieved here\n"
+"ESP/IRrecv  ---MQTT Pub Topic, Will publish any IR packets recieved here\n\n"
 "ESP/RLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255)\n"
 "ESP/GLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255)\n"
 "ESP/BLED      ---MQTT Sub Topic, Set RED Led Brightness (0-255)\n"
