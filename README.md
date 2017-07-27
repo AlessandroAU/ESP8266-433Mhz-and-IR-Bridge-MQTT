@@ -4,6 +4,8 @@ ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to
 This project uses an ESP8266 to bridge 433/315Mhz OOK/ASK RF modules as well as 38khz based IR devices to a LAN network.
 The primary intended form of communication is over MQTT to allow for easy integration into home automation systems such as OpenHAB or HomeAssistant
 
+Written in the Ardiuno IDE with the ESP8266 board manager plugins
+
 ![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/main.png)
 
 This means you can send and receive from ANY 433Mhz/315Mhz OOK sensor, switch etc.
@@ -83,8 +85,8 @@ To bind this to a virtual switch in OpenHAB is simple.
 
 The best way is to have a .map file. 
 
-Make a .map file and place it under 'transform' in your OpenHAB directory
-This should be self explanatory, but basically we 'map' switch state like ON/OFF to the RF packet
+Make a .map file and place it under 'transform' in your OpenHAB directory,
+basically we 'map' switch state like ON/OFF to the RF packet
 
 It will look like this:
 
@@ -98,13 +100,16 @@ transform/RF/AlessFanLight.map
 
 Will you need to have the transform addon enabled in OpenHAB as well as the MQTT service configured
 
-Now your switch binding is would be something like this: 
+Now your switch binding would be something like this: 
 
-<b> {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"} </b>
+<b> Switch AlessFanLight "Fan Light" {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"} </b>
 
 Now when the switch recieves an ON or OFF command it will be 'mapped' to the RF packet, and sent out to the ESP8266 bridge to be relayed over the air.
 If you have an RTL-SDR module you can use to make sure the data is being sent.
 
+
+Decoding received data is more complex, currently I handle this with a custom python script,
+I would like to impliment something more elegant on the bridge itself. 
 
 
 License: CC BY-NC-SA 3.0
