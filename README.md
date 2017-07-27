@@ -4,6 +4,8 @@ ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to
 This project uses an ESP8266 to bridge 433/315Mhz OOK/ASK RF modules as well as 38khz based IR devices to a LAN network.
 The primary intended form of communication is over MQTT to allow for easy integration into home automation systems such as OpenHAB or HomeAssistant
 
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/example/main.png)
+
 This means you can send and receive from ANY 433Mhz/315Mhz OOK sensor, switch etc.
 It also supports any 38 khz IR device. At the moment packets are raw format and encoded as pulse lengths, 
 there is no packet decoding implemented yet.
@@ -63,18 +65,20 @@ The is the RAW packet stucture, the first value the length of the the packet, ea
 
 For the example in the above image: (not to scale)
 
-___________---______---___------______
-   124      6   22   7  7   20    22
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/example/packet.PNG)
    
-A small variance is expected and will not effect operation.
+A small variance is expected from packet to packet and will not effect operation. 
+The values should only be -/+2 difference form eachother for stable operation. 
+The first few packets may also be incorrect until the reciever AGC kicks in. 
 
-Now to send that signal you simply publish the same message to "ESP/RFtoSend"
+Now to send that signal you simply publish the same message to <b>"ESP/RFtoSend"</b>
 
 <b>mosquitto_pub -t "ESP/RFtoSend" -m "{37,126,5,22,6,9,18,22,6,9,19,23,5,22,6,9,19,9,19,23,5,22,6,9,19,9,19,21,5,8,20,8,20,9,17,9,19}"</b>
 
 The packet will be relayed over 433Mhz and should emulate the effect of the hardware remote. 
 
-<b> OpenHAB integration </b>
+<b> OpenHAB integration: </b>
+
 To bind this to a virtual switch in OpenHAB is simple.
 
 The best way is to have a .map file. 
@@ -99,6 +103,7 @@ Now your switch binding is would be something like this:
 <b> {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"} </b>
 
 Now when the switch recieves an ON or OFF command it will be 'mapped' to the RF packet, and sent out to the ESP8266 bridge to be relayed over the air.
+If you have an RTL-SDR module you can use to make sure the data is being sent.
 
 
 
