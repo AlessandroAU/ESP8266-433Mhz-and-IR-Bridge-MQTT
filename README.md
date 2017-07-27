@@ -15,6 +15,8 @@ there is no packet decoding implemented yet.
 The bridge can be as 'polished' or rudimentary as you like, the bridge can be built on a breadboard or integrated into a custom housing.
 STLs will be provided for a 3D printed enclosure that fits a WeMo 8266 along with a daughter board to mount the RF modules. See images.
 
+There is also provision for a RGB led that can be used as an indicator
+
 The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
 
 <b> Basic Usage: </b>
@@ -39,9 +41,9 @@ The following topics are used for communication:
 
 <b>ESP/RLED</b>      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
 
-<b>ESP/GLED</b>      ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
+<b>ESP/GLED</b>      ---MQTT Sub Topic, Set BLUE Led Brightness (0-255) (Optional led Topic)
 
-<b>ESP/BLED</b>     ---MQTT Sub Topic, Set RED Led Brightness (0-255) (Optional led Topic)
+<b>ESP/BLED</b>     ---MQTT Sub Topic, Set GREEN Led Brightness (0-255) (Optional led Topic)
 
 <b>ESP/Status</b>   ---MQTT Pub Topic, Publishes Debug Messages to here
 
