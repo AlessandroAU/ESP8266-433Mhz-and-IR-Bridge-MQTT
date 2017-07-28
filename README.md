@@ -21,7 +21,19 @@ There is also provision for a RGB led that can be used as an indicator
 
 The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
 
-Alt-Basic Usage:
+Hardware:
+
+If you don't care about IR the easiest solution is to purchase an RF repeater such as this:
+https://www.aliexpress.com/item/RF-wireless-repeater-wireless-calling-system-repeater-Signal-amplifier-transmitter-repeater/32379532511.html
+
+Then modify it as follows, for the extra resistor on the RX line anything between 2k and 10k will work fine. 
+
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater1.png)
+
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater2.png)
+
+
+Basic Usage:
 ======
 
 You will need a properly setup and working MQTT server on your local network (WAN servers have not been tested)
@@ -50,7 +62,8 @@ The following topics are used for communication:
 
 <b>ESP/Status</b>   ---MQTT Pub Topic, Publishes Debug Messages to here
 
-<b> Example: </b>
+Example:
+------
 Lets say you want to control a 433mhz switch from your home automation system.
 
 I assume you are running the MQTT server on a linux based device. 
