@@ -28,9 +28,9 @@ https://www.aliexpress.com/item/RF-wireless-repeater-wireless-calling-system-rep
 
 Then modify it as follows, for the extra resistor on the RX line anything between 2k and 10k will work fine. 
 
-![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater1.png)
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater1.PNG)
 
-![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater2.png)
+![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater2.PNG)
 
 
 Basic Usage:
