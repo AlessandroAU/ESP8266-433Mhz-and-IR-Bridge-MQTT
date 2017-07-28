@@ -1,5 +1,5 @@
 # ESP8266-433Mhz-and-IR-Bridge-MQTT
-ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to a network via MQTT over WiFi
+ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to a network via MQTT over WiFi!
 
 Note: There is a problem with this current code, do not use this yet. I will fix this in a few days and remove this message
 
@@ -10,18 +10,17 @@ Written in the Ardiuno IDE with the ESP8266 board manager plugins
 
 ![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/main.png)
 
-This means you can send and receive from ANY 433Mhz/315Mhz OOK sensor, switch etc.
+This device allows you to send and receive messages from ANY 433Mhz/315Mhz OOK sensor, switch etc.
 It also supports any 38 khz IR device. At the moment packets are raw format and encoded as pulse lengths, 
 there is no packet decoding implemented yet.
 
-The bridge can be as 'polished' or rudimentary as you like, the bridge can be built on a breadboard or integrated into a custom housing.
-STLs will be provided for a 3D printed enclosure that fits a WeMo 8266 along with a daughter board to mount the RF modules. See images.
-
-There is also provision for a RGB led that can be used as an indicator
-
-The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
+There is also provision for a RGB led that can be used as an indicator. The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
 
 Hardware:
+-----
+
+The bridge hardware can be as 'polished' or rudimentary as you like, the bridge can be built on a breadboard or integrated into a custom housing.
+STLs will be provided for a 3D printed enclosure that fits a WeMo 8266 along with a daughter board to mount the RF modules.
 
 If you don't care about IR the easiest solution is to purchase an RF repeater such as this:
 https://www.aliexpress.com/item/RF-wireless-repeater-wireless-calling-system-repeater-Signal-amplifier-transmitter-repeater/32379532511.html
@@ -31,6 +30,8 @@ Then modify it as follows, for the extra resistor on the RX line anything betwee
 ![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater1.PNG)
 
 ![alt text](https://raw.githubusercontent.com/AlessandroAU/ESP8266-433Mhz-and-IR-Bridge-MQTT/master/Images/repeater2.PNG)
+
+Otherwise, free to use discrete transmitter and reciever modules. 
 
 
 Basic Usage:
@@ -74,7 +75,9 @@ but of course you can edit the variable and recompile
 
 Subscribe to the topic "ESP/RFrecv" (make sure you have mosquitto and mosquitto-clients installed and configured!)
 
+```
 mosquitto_sub -t "ESP/RFrecv"
+```
 
 If there is some RF noise in your location you may already see some messages come through. Press button on your RF device.
 You should see packets stream through.
@@ -114,15 +117,16 @@ It will look like this:
 
 save it to: (for example)
 
-
-
-transform/RF/AlessFanLight.map
+<b>transform/RF/AlessFanLight.map</b>
 
 Will you need to have the transform addon enabled in OpenHAB as well as the MQTT service configured
 
 Now your switch binding would be something like this: 
 
-<b> Switch AlessFanLight "Fan Light" {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"} </b>
+
+```
+Switch AlessFanLight "Fan Light" {mqtt=">[MQTTPI:ESP/RFtoSend:command:*:MAP(RF/AlessFanLight.map)]"}
+```
 
 Now when the switch recieves an ON or OFF command it will be 'mapped' to the RF packet, and sent out to the ESP8266 bridge to be relayed over the air.
 If you have an RTL-SDR module you can use to make sure the data is being sent.
