@@ -80,9 +80,9 @@ The first few packets may also be incorrect until the reciever AGC kicks in.
 
 Now to send that signal you simply publish the same message to <b>"ESP/RFtoSend"</b>
 
-'''
+```
 mosquitto_pub -t "ESP/RFtoSend" -m "{37,126,5,22,6,9,18,22,6,9,19,23,5,22,6,9,19,9,19,23,5,22,6,9,19,9,19,21,5,8,20,8,20,9,17,9,19}"
-'''
+```
 
 The packet will be relayed over 433Mhz and should emulate the effect of the hardware remote. 
 
