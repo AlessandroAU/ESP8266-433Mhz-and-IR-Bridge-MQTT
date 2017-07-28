@@ -21,7 +21,8 @@ There is also provision for a RGB led that can be used as an indicator
 
 The board is compatible with most cheap 433/315Mhz OOK/ASK modules that are available cheaply from various online sources. 
 
-<b> Basic Usage: </b>
+Alt-Basic Usage:
+======
 
 You will need a properly setup and working MQTT server on your local network (WAN servers have not been tested)
 
@@ -79,9 +80,9 @@ The first few packets may also be incorrect until the reciever AGC kicks in.
 
 Now to send that signal you simply publish the same message to <b>"ESP/RFtoSend"</b>
 
-''''bash
-<b>mosquitto_pub -t "ESP/RFtoSend" -m "{37,126,5,22,6,9,18,22,6,9,19,23,5,22,6,9,19,9,19,23,5,22,6,9,19,9,19,21,5,8,20,8,20,9,17,9,19}"</b>
-''''
+'''
+mosquitto_pub -t "ESP/RFtoSend" -m "{37,126,5,22,6,9,18,22,6,9,19,23,5,22,6,9,19,9,19,23,5,22,6,9,19,9,19,21,5,8,20,8,20,9,17,9,19}"
+'''
 
 The packet will be relayed over 433Mhz and should emulate the effect of the hardware remote. 
 
