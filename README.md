@@ -1,8 +1,6 @@
 # ESP8266-433Mhz-and-IR-Bridge-MQTT
 ESP8266 based bridge that allows you bridge any 433Mhz ASK/OOK and IR devices to a network via MQTT over WiFi!
 
-Note: There is a problem with this current code, do not use this yet. I will fix this in a few days and remove this message
-
 This project uses an ESP8266 to bridge 433/315Mhz OOK/ASK RF modules as well as 38khz based IR devices to a LAN network.
 The primary intended form of communication is over MQTT to allow for easy integration into home automation systems such as OpenHAB or HomeAssistant
 
